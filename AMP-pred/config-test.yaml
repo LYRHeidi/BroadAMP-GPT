@@ -1,0 +1,20 @@
+epochs: 50
+batch_size: 32
+vocab_size: 25
+task: amp  # hemo, sol, nf, amp, test
+debug: false
+model_path: './checkpoints/amp-0106_1727'
+
+network:
+  hidden_size: 480
+  hidden_layers: 12
+  attn_heads: 12
+  dropout: 0.15
+
+# optim:
+#   lr: 1.0e-5
+
+sch:
+  name: lronplateau  # onecycle, lronplateau
+  factor: 0.1
+  patience: 4

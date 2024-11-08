@@ -1,0 +1,19 @@
+epochs: 12
+batch_size: 128
+vocab_size: 25
+task: amp  
+debug: false
+
+network:
+  hidden_size: 480
+  hidden_layers: 12
+  attn_heads: 12
+  dropout: 0.15
+
+optim:
+  lr: 1.0e-6
+
+sch:
+  name: lronplateau 
+  factor: 0.1
+  patience: 4
