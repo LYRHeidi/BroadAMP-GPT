@@ -20,8 +20,9 @@ config = yaml.load(open('./config-test.yaml', 'r'), Loader=yaml.FullLoader)
 config['device'] = device
 
 class AmpData():
-    def __init__(self, df, tokenizer_name='./prot_bert_bfd', max_len=300):
-       
+    def __init__(self, df, tokenizer_name='Rostlab/prot_bert_bfd', max_len=300):
+    # def __init__(self, df, tokenizer_name='./prot_bert_bfd', max_len=300):
+        
         self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, do_lower_case=False)
         self.max_len = max_len
         self.df = df
@@ -144,15 +145,17 @@ def test(model, dataloader, device):
             logits = model(inputs, attention_mask).squeeze()
     
         predvalues.extend(logits.cpu().tolist())
-        preds = torch.where(logits > 0.5, 1, 0)
-        predictions.extend(preds.cpu().tolist())
+        # preds = torch.where(logits > 0.5, 1, 0)
+        # predictions.extend(preds.cpu().tolist())
 
-    return predvalues, predictions
+    # return predvalues, predictions
+    return predvalues
 ################################################################################
 if not config['debug']:
     model.load_state_dict(torch.load(f'{save_dir}/model.pt')['model_state_dict'], strict=False)
-predvalues, predictions = test(model, test_data_loader, device)
+# predvalues, predictions = test(model, test_data_loader, device)
+predvalues = test(model, test_data_loader, device)
 testdf['predvalue'] = predvalues
-testdf['predictions'] = predictions
+# testdf['predictions'] = predictions
 testdf.to_csv(f'./result/{dirname}_pred_result.csv', index=None)
 print('Model saved in: ', f'./result/{dirname}_pred_result.csv')
