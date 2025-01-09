@@ -15,14 +15,14 @@ if __name__ == '__main__':
         parser.add_argument('--csv_name', type=str, default='gen_AMP', help="name to save the generated mols in csv format", required=False)
         parser.add_argument('--batch_size', type=int, default = 8, help="batch size", required=False)
         parser.add_argument('--gen_size', type=int, default = 560000, help="number of times to generate from a batch", required=False)
-        parser.add_argument('--vocab_size', type=int, default = 21, help="number of layers", required=False) 
-        parser.add_argument('--block_size', type=int, default = 190, help="number of layers", required=False)   
+        parser.add_argument('--vocab_size', type=int, default = 22, help="number of layers", required=False) 
+        parser.add_argument('--block_size', type=int, default = 132, help="number of layers", required=False)   
         parser.add_argument('--props', nargs="+", default = [], help="properties to be used for condition", required=False)
         parser.add_argument('--n_layer', type=int, default = 8, help="number of layers", required=False)
         parser.add_argument('--n_head', type=int, default = 8, help="number of heads", required=False)
         parser.add_argument('--n_embd', type=int, default = 256, help="embedding dimension", required=False)
         parser.add_argument('--lstm_layers', type=int, default = 2, help="number of layers in lstm", required=False)
-        parser.add_argument('--sequence_size', type=int, default = 190, help="number of generate sequence length", required=False)
+        parser.add_argument('--sequence_size', type=int, default = 132, help="number of generate sequence length", required=False)
         args = parser.parse_args()
 
         frequence = {'A': 0.06152815486054793,
@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
         pattern = "(\[[^\]]+]|<|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|\(|\)|\.|=|#|-|\+|\\\\|\/|:|~|@|\?|>|\*|\$|\%[0-9]{2}|[0-9])"
         regex = re.compile(pattern)
-        chars = ['<', 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']  
+        chars = ['<', 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', 'X']  
         stoi = { ch:i for i,ch in enumerate(chars)}
         itos = { i:ch for ch,i in stoi.items() }
         print(itos)
